@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bsmq07gk2ndao"]
+[gd_scene load_steps=13 format=3 uid="uid://bsmq07gk2ndao"]
 
 [ext_resource type="PackedScene" uid="uid://c2my0vtkton55" path="res://scenes/player.tscn" id="1_o03e5"]
 [ext_resource type="PackedScene" uid="uid://csqepqkyac4q2" path="res://scenes/bush.tscn" id="2_ny41p"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b4047g3cru7eh" path="res://sprites/World/GrassBackground.png" id="3_nwgf2"]
 [ext_resource type="Texture2D" uid="uid://cmvn82slvtube" path="res://sprites/World/CliffTileset.png" id="5_d4r2o"]
 [ext_resource type="PackedScene" uid="uid://cgy50c0n0x3a5" path="res://scenes/grass.tscn" id="6_56dwl"]
+[ext_resource type="PackedScene" uid="uid://ri4kpauc3tvo" path="res://scenes/bat.tscn" id="7_vd3k7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vth4u"]
 texture = ExtResource("2_wjg1d")
@@ -893,6 +894,7 @@ position = Vector2(72, 32)
 position = Vector2(8, 144)
 
 [node name="Grasses" type="Node2D" parent="YSorted"]
+y_sort_enabled = true
 
 [node name="Grass" parent="YSorted/Grasses" instance=ExtResource("6_56dwl")]
 position = Vector2(296, 112)
@@ -941,3 +943,15 @@ position = Vector2(312, 112)
 
 [node name="Grass16" parent="YSorted/Grasses" instance=ExtResource("6_56dwl")]
 position = Vector2(312, 80)
+
+[node name="Enemies" type="Node2D" parent="YSorted"]
+y_sort_enabled = true
+
+[node name="Bat" parent="YSorted/Enemies" instance=ExtResource("7_vd3k7")]
+position = Vector2(72, 112)
+
+[node name="Bat2" parent="YSorted/Enemies" instance=ExtResource("7_vd3k7")]
+position = Vector2(176, 56)
+
+[node name="Bat3" parent="YSorted/Enemies" instance=ExtResource("7_vd3k7")]
+position = Vector2(184, 136)
