@@ -6,10 +6,22 @@ extends CharacterBody2D
 @export var accelleration := 400
 @export var friction := 150
 
-enum MovementMode {FIXED, DRIFTY, ICY}
+enum MovementMode {
+	FIXED, # change speed instantly
+	DRIFTY, # simplified acceleration
+	ICY # low friction
+}
 
-@onready var animationTree := $AnimationTree as AnimationTree
-@onready var animationState := animationTree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+enum ActionState {
+	MOVING,
+	ROLLING,
+	ATTACKING
+}
+
+@onready var anim_tree := $AnimationTree as AnimationTree
+@onready var anim_state := anim_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+
+var action_state := ActionState.MOVING
 
 
 func _ready() -> void:
@@ -17,11 +29,34 @@ func _ready() -> void:
 	# affect move_and_slide(), this mode is for top-down 2d games
 	self.set_motion_mode(MotionMode.MOTION_MODE_FLOATING)
 	
-	if not animationState:
+	anim_tree.active = true
+	if not anim_state:
 		print_debug("Failed to get animation node state machine playback")
 
 
 func _physics_process(delta: float) -> void:
+	# handle base on player's action state
+	match action_state:
+		ActionState.MOVING:
+			self._moving_state(delta)
+			# transition
+			if Input.is_action_just_pressed("attack"):
+				action_state = ActionState.ATTACKING
+			if Input.is_action_just_pressed("roll"):
+				action_state = ActionState.ROLLING
+				
+		ActionState.ATTACKING:
+			self._attacking_state(delta)
+			if Input.is_action_just_pressed("roll"):
+				action_state = ActionState.ROLLING
+				
+		ActionState.ROLLING:
+			self._rolling_state()
+			action_state = ActionState.MOVING
+	return
+
+
+func _moving_state(delta: float) -> void:
 	# get move direction from user's directional inputs
 	var input_direction := Vector2.ZERO
 	input_direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -29,22 +64,25 @@ func _physics_process(delta: float) -> void:
 	input_direction = input_direction.normalized()
 	
 	# update animation of player
-	self._update_animation(input_direction)
+	self._update_move_animation(input_direction)
 	
-	# update velocity bases on movement modes
+	# update internal velocity bases on movement modes
 	self._calculate_velocity(delta, input_direction)
 	
 	# move player
 	move_and_slide()
+	return
 
 
-func _update_animation(input_direction: Vector2) -> void:
+func _update_move_animation(input_direction: Vector2) -> void:
+	# set position of blend 2d in Animation Tree
 	if input_direction != Vector2.ZERO:
-		animationTree.set("parameters/Idling/blend_position", input_direction)
-		animationTree.set("parameters/Running/blend_position", input_direction)
-		animationState.travel("Running")
+		anim_tree.set("parameters/Idling/blend_position", input_direction)
+		anim_tree.set("parameters/Running/blend_position", input_direction)
+		anim_tree.set("parameters/Attack/blend_position", input_direction)
+		anim_state.travel("Running")
 	else:
-		animationState.travel("Idling")
+		anim_state.travel("Idling")
 	return
 
 
@@ -63,3 +101,19 @@ func _calculate_velocity(delta: float, input_direction: Vector2) -> void:
 				self.velocity = self.velocity.move_toward(Vector2.ZERO, friction * delta)
 			self.velocity = self.velocity.limit_length(max_move_speed)
 	return
+
+
+func _attacking_state(delta: float) -> void:
+	# play animation
+	anim_state.travel("Attack")
+	# smoothly stop the player and reset velocity
+	self.velocity = self.velocity.move_toward(Vector2.ZERO, accelleration * delta)
+	move_and_slide()
+
+
+func _rolling_state(_delta: float = 0.4) -> void:
+	pass
+
+
+func _on_trigger_action_finished() -> void:
+	action_state = ActionState.MOVING
