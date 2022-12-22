@@ -1,0 +1,56 @@
+[gd_scene load_steps=14 format=3 uid="uid://oobmli08jmhg"]
+
+[ext_resource type="Texture2D" uid="uid://dxfntj0gccljp" path="res://sprites/Effects/EnemyDeathEffect.png" id="1_3l3bh"]
+[ext_resource type="Script" path="res://scripts/effects/vfx_once.gd" id="2_bni1x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ko045"]
+atlas = ExtResource("1_3l3bh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fe1es"]
+atlas = ExtResource("1_3l3bh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjjoa"]
+atlas = ExtResource("1_3l3bh")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48m8j"]
+atlas = ExtResource("1_3l3bh")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_db6th"]
+atlas = ExtResource("1_3l3bh")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnk84"]
+atlas = ExtResource("1_3l3bh")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwo3u"]
+atlas = ExtResource("1_3l3bh")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgyl3"]
+atlas = ExtResource("1_3l3bh")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfmo7"]
+atlas = ExtResource("1_3l3bh")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htl3n"]
+atlas = ExtResource("1_3l3bh")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ld34m"]
+animations = [{
+"frames": [SubResource("AtlasTexture_ko045"), SubResource("AtlasTexture_fe1es"), SubResource("AtlasTexture_rjjoa"), SubResource("AtlasTexture_48m8j"), SubResource("AtlasTexture_db6th"), SubResource("AtlasTexture_xnk84"), SubResource("AtlasTexture_wwo3u"), SubResource("AtlasTexture_rgyl3"), SubResource("AtlasTexture_qfmo7"), SubResource("AtlasTexture_htl3n")],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="BatDeathVfx" type="AnimatedSprite2D"]
+frames = SubResource("SpriteFrames_ld34m")
+script = ExtResource("2_bni1x")

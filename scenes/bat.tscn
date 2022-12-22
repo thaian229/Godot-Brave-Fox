@@ -45,11 +45,14 @@ height = 18.0
 texture_filter = 1
 collision_layer = 64
 script = ExtResource("1_nvqtc")
+knock_back_speed = 85
+air_friction = 85
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 3)
 frames = SubResource("SpriteFrames_7jo7b")
+playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 15)
@@ -69,7 +72,7 @@ position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_isdkx")
 
 [node name="Damageable" parent="." instance=ExtResource("5_o7u3y")]
-max_health = 2
+max_health = 3
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="zero_health" from="Damageable" to="." method="_on_damageable_zero_health"]

@@ -1,8 +1,8 @@
 class_name Grass
 extends Node2D
 
-@onready var grass_vfx := load("res://scenes/effects/grass_wither_vfx.tscn") as PackedScene
-@onready var vfx_instance := grass_vfx.instantiate() as Node2D
+@onready var grass_vfx := preload("res://scenes/effects/grass_wither_vfx.tscn") as PackedScene
+@onready var vfx_instance := grass_vfx.instantiate() as AnimatedSprite2D
 
 
 func _on_hurtbox_area_entered(_area: Area2D) -> void:

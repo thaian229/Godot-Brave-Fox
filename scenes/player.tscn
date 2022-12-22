@@ -767,10 +767,10 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_sdjpc")
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_1qioy")
-parameters/Attack/blend_position = Vector2(0, 0)
-parameters/Idling/blend_position = Vector2(0, 0)
-parameters/Roll/blend_position = Vector2(0, -0.00645161)
-parameters/Running/blend_position = Vector2(0, 0)
+parameters/Attack/blend_position = Vector2(0, 1)
+parameters/Idling/blend_position = Vector2(0, 1)
+parameters/Roll/blend_position = Vector2(0, 1)
+parameters/Running/blend_position = Vector2(0, 1)
 
 [node name="SwordPivot" type="Node2D" parent="."]
 position = Vector2(0, -4)
@@ -779,6 +779,7 @@ position = Vector2(0, -4)
 position = Vector2(16, 0)
 collision_layer = 16
 collision_mask = 8
+damage = 2
 
 [node name="CollisionShape2D" parent="SwordPivot/SwordHitbox" index="0"]
 shape = SubResource("CapsuleShape2D_ug18x")

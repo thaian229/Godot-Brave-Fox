@@ -1,41 +1,37 @@
 [gd_scene load_steps=9 format=3 uid="uid://ccpgwgrntin3t"]
 
-[ext_resource type="Script" path="res://scripts/effects/grass_wither_vfx.gd" id="1_8470h"]
 [ext_resource type="Texture2D" uid="uid://5u37fr5as7m1" path="res://sprites/Effects/GrassEffect.png" id="1_dawhl"]
+[ext_resource type="Script" path="res://scripts/effects/vfx_once.gd" id="1_xqjvd"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_reusb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0itsm"]
 atlas = ExtResource("1_dawhl")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xkmj7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytap2"]
 atlas = ExtResource("1_dawhl")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pv08q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5va1"]
 atlas = ExtResource("1_dawhl")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_imax4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tli7c"]
 atlas = ExtResource("1_dawhl")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xnw50"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6jsv"]
 atlas = ExtResource("1_dawhl")
 region = Rect2(128, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_idj07"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ad0x"]
 animations = [{
-"frames": [SubResource("AtlasTexture_reusb"), SubResource("AtlasTexture_xkmj7"), SubResource("AtlasTexture_pv08q"), SubResource("AtlasTexture_imax4"), SubResource("AtlasTexture_xnw50")],
-"loop": false,
+"frames": [SubResource("AtlasTexture_0itsm"), SubResource("AtlasTexture_ytap2"), SubResource("AtlasTexture_h5va1"), SubResource("AtlasTexture_tli7c"), SubResource("AtlasTexture_h6jsv")],
+"loop": true,
 "name": &"default",
-"speed": 10.0
+"speed": 5.0
 }]
 
-[node name="GrassWitherVfx" type="Node2D"]
+[node name="GrassWitherVfx" type="AnimatedSprite2D"]
 texture_filter = 1
-script = ExtResource("1_8470h")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-frames = SubResource("SpriteFrames_idj07")
-
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+frames = SubResource("SpriteFrames_4ad0x")
+script = ExtResource("1_xqjvd")
