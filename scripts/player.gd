@@ -8,16 +8,17 @@ extends CharacterBody2D
 
 enum MovementMode {FIXED, DRIFTY, ICY}
 
-@onready var animator := $AnimationPlayer as AnimationPlayer
+@onready var animationTree := $AnimationTree as AnimationTree
+@onready var animationState := animationTree.get("parameters/playback") as AnimationNodeStateMachinePlayback
 
 
 func _ready() -> void:
 	self.velocity = Vector2.ZERO
 	# affect move_and_slide(), this mode is for top-down 2d games
 	self.set_motion_mode(MotionMode.MOTION_MODE_FLOATING)
-	# default animation
-	animator.play("Player/RunRight")
-
+	
+	if not animationState:
+		print_debug("Failed to get animation node state machine playback")
 
 
 func _physics_process(delta: float) -> void:
@@ -27,6 +28,9 @@ func _physics_process(delta: float) -> void:
 	input_direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_direction = input_direction.normalized()
 	
+	# update animation of player
+	self._update_animation(input_direction)
+	
 	# update velocity bases on movement modes
 	self._calculate_velocity(delta, input_direction)
 	
@@ -34,8 +38,14 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func _update_animation(_input_direction: Vector2) -> void:
-	pass
+func _update_animation(input_direction: Vector2) -> void:
+	if input_direction != Vector2.ZERO:
+		animationTree.set("parameters/Idling/blend_position", input_direction)
+		animationTree.set("parameters/Running/blend_position", input_direction)
+		animationState.travel("Running")
+	else:
+		animationState.travel("Idling")
+	return
 
 
 func _calculate_velocity(delta: float, input_direction: Vector2) -> void:
