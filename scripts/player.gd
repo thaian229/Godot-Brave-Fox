@@ -8,11 +8,16 @@ extends CharacterBody2D
 
 enum MovementMode {FIXED, DRIFTY, ICY}
 
+@onready var animator := $AnimationPlayer as AnimationPlayer
+
 
 func _ready() -> void:
 	self.velocity = Vector2.ZERO
 	# affect move_and_slide(), this mode is for top-down 2d games
 	self.set_motion_mode(MotionMode.MOTION_MODE_FLOATING)
+	# default animation
+	animator.play("Player/RunRight")
+
 
 
 func _physics_process(delta: float) -> void:
@@ -27,6 +32,10 @@ func _physics_process(delta: float) -> void:
 	
 	# move player
 	move_and_slide()
+
+
+func _update_animation(_input_direction: Vector2) -> void:
+	pass
 
 
 func _calculate_velocity(delta: float, input_direction: Vector2) -> void:
