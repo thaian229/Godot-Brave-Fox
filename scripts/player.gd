@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 @export var max_move_speed := 100
 @export var movement_mode := MovementMode.FIXED
+@export var rolling_speed := 100
+@export var rolling_cooldown := 1.5
 @export var accelleration := 400
 @export var friction := 150
 
@@ -22,6 +24,7 @@ enum ActionState {
 @onready var anim_state := anim_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
 
 var action_state := ActionState.MOVING
+var dt_rolling := rolling_cooldown
 
 
 func _ready() -> void:
@@ -35,6 +38,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# update cooldown
+	dt_rolling += delta
+	
 	# handle base on player's action state
 	match action_state:
 		ActionState.MOVING:
@@ -42,17 +48,18 @@ func _physics_process(delta: float) -> void:
 			# transition
 			if Input.is_action_just_pressed("attack"):
 				action_state = ActionState.ATTACKING
-			if Input.is_action_just_pressed("roll"):
+			if Input.is_action_just_pressed("roll") and dt_rolling >= rolling_cooldown:
+				dt_rolling = 0.0
 				action_state = ActionState.ROLLING
 				
 		ActionState.ATTACKING:
 			self._attacking_state(delta)
-			if Input.is_action_just_pressed("roll"):
+			if Input.is_action_just_pressed("roll") and dt_rolling >= rolling_cooldown:
+				dt_rolling = 0.0
 				action_state = ActionState.ROLLING
 				
 		ActionState.ROLLING:
 			self._rolling_state(delta)
-			action_state = ActionState.MOVING
 	return
 
 
@@ -80,6 +87,7 @@ func _update_move_animation(input_direction: Vector2) -> void:
 		anim_tree.set("parameters/Idling/blend_position", input_direction)
 		anim_tree.set("parameters/Running/blend_position", input_direction)
 		anim_tree.set("parameters/Attack/blend_position", input_direction)
+		anim_tree.set("parameters/Roll/blend_position", input_direction)
 		anim_state.travel("Running")
 	else:
 		anim_state.travel("Idling")
@@ -106,13 +114,21 @@ func _calculate_velocity(delta: float, input_direction: Vector2) -> void:
 func _attacking_state(delta: float) -> void:
 	# play animation
 	anim_state.travel("Attack")
+	
 	# smoothly stop the player and reset velocity
 	self.velocity = self.velocity.move_toward(Vector2.ZERO, accelleration * delta)
 	move_and_slide()
 
 
 func _rolling_state(_delta: float) -> void:
-	pass
+	# play animation
+	anim_state.travel("Roll")
+	
+	# maintaining velocity base on last input direction
+	var direction := anim_tree.get("parameters/Roll/blend_position") as Vector2
+	direction = Vector2.DOWN if direction == Vector2.ZERO else direction.normalized()
+	self.velocity = direction * rolling_speed
+	move_and_slide()
 
 
 func _on_trigger_action_finished() -> void:
