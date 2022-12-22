@@ -51,7 +51,7 @@ func _physics_process(delta: float) -> void:
 				action_state = ActionState.ROLLING
 				
 		ActionState.ROLLING:
-			self._rolling_state()
+			self._rolling_state(delta)
 			action_state = ActionState.MOVING
 	return
 
@@ -111,7 +111,7 @@ func _attacking_state(delta: float) -> void:
 	move_and_slide()
 
 
-func _rolling_state(_delta: float = 0.4) -> void:
+func _rolling_state(_delta: float) -> void:
 	pass
 
 

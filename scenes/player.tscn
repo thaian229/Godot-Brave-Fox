@@ -427,15 +427,15 @@ graph_offset = Vector2(-192, 2)
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
 script = ExtResource("1_1wicd")
-metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
 texture = ExtResource("1_3wlxc")
 hframes = 60
 frame = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 7)
+position = Vector2(0, -1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_edh0q")
 
