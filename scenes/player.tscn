@@ -252,6 +252,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_edh0q"]
+radius = 4.0
+height = 12.0
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
@@ -264,4 +266,6 @@ animation = &"all"
 frame = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_edh0q")

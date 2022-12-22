@@ -2,15 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://cvijoqoa8cdls" path="res://sprites/World/Bush.png" id="1_swunh"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1la1"]
-size = Vector2(28, 28)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5fbu3"]
+radius = 8.0
+height = 24.0
 
 [node name="Bush" type="StaticBody2D"]
 texture_filter = 1
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
 texture = ExtResource("1_swunh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_a1la1")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_5fbu3")
