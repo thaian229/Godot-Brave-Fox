@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsmq07gk2ndao"]
+
+[ext_resource type="PackedScene" uid="uid://c2my0vtkton55" path="res://scenes/player.tscn" id="1_o03e5"]
+[ext_resource type="PackedScene" uid="uid://csqepqkyac4q2" path="res://scenes/bush.tscn" id="2_ny41p"]
+
+[node name="World" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_o03e5")]
+position = Vector2(22, 26)
+movement_mode = 1
+
+[node name="Bush" parent="." instance=ExtResource("2_ny41p")]
+position = Vector2(163, 87)
