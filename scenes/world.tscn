@@ -830,6 +830,7 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_5anq7"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Clift"
 terrain_set_0/terrain_0/color = Color(0.611765, 0.239216, 0.321569, 1)
@@ -894,19 +895,19 @@ position = Vector2(8, 144)
 [node name="Grasses" type="Node2D" parent="YSorted"]
 
 [node name="Grass" parent="YSorted/Grasses" instance=ExtResource("6_56dwl")]
-position = Vector2(72, 80)
+position = Vector2(296, 112)
 
 [node name="Grass2" parent="YSorted/Grasses" instance=ExtResource("6_56dwl")]
-position = Vector2(184, 32)
+position = Vector2(216, 64)
 
 [node name="Grass3" parent="YSorted/Grasses" instance=ExtResource("6_56dwl")]
 position = Vector2(200, 64)
 
 [node name="Grass4" parent="YSorted/Grasses" instance=ExtResource("6_56dwl")]
-position = Vector2(264, 64)
+position = Vector2(312, 64)
 
 [node name="Grass5" parent="YSorted/Grasses" instance=ExtResource("6_56dwl")]
-position = Vector2(184, 128)
+position = Vector2(184, 162)
 
 [node name="Grass6" parent="YSorted/Grasses" instance=ExtResource("6_56dwl")]
 position = Vector2(168, 144)
@@ -924,13 +925,13 @@ position = Vector2(136, 48)
 position = Vector2(136, 16)
 
 [node name="Grass11" parent="YSorted/Grasses" instance=ExtResource("6_56dwl")]
-position = Vector2(104, 48)
+position = Vector2(120, 48)
 
 [node name="Grass12" parent="YSorted/Grasses" instance=ExtResource("6_56dwl")]
-position = Vector2(8, 96)
+position = Vector2(152, 162)
 
 [node name="Grass13" parent="YSorted/Grasses" instance=ExtResource("6_56dwl")]
-position = Vector2(24, 48)
+position = Vector2(40, 144)
 
 [node name="Grass14" parent="YSorted/Grasses" instance=ExtResource("6_56dwl")]
 position = Vector2(264, 112)

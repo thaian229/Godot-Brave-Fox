@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://ccpgwgrntin3t"]
 
+[ext_resource type="Script" path="res://scripts/effects/grass_wither_vfx.gd" id="1_8470h"]
 [ext_resource type="Texture2D" uid="uid://5u37fr5as7m1" path="res://sprites/Effects/GrassEffect.png" id="1_dawhl"]
-[ext_resource type="Script" path="res://scripts/effects/grass_wither_vfx.gd" id="1_kiebh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_reusb"]
 atlas = ExtResource("1_dawhl")
@@ -33,7 +33,7 @@ animations = [{
 
 [node name="GrassWitherVfx" type="Node2D"]
 texture_filter = 1
-script = ExtResource("1_kiebh")
+script = ExtResource("1_8470h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 frames = SubResource("SpriteFrames_idj07")

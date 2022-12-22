@@ -4,9 +4,9 @@ extends Node2D
 @onready var grass_vfx := load("res://scenes/effects/grass_wither_vfx.tscn") as PackedScene
 @onready var vfx_instance := grass_vfx.instantiate() as Node2D
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("attack"):
-		var world = get_tree().current_scene
-		world.add_child(vfx_instance)
-		vfx_instance.global_position = self.global_position
-		self.queue_free()
+
+func _on_hurtbox_area_entered(_area: Area2D) -> void:
+	var world = get_tree().current_scene
+	world.add_child(vfx_instance)
+	vfx_instance.global_position = self.global_position
+	self.call_deferred("queue_free")
