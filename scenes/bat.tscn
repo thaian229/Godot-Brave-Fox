@@ -50,7 +50,7 @@ radius = 50.0
 radius = 7.0
 height = 22.0
 
-[node name="w" type="CharacterBody2D"]
+[node name="Bat" type="CharacterBody2D"]
 texture_filter = 1
 collision_layer = 64
 collision_mask = 65
@@ -82,7 +82,6 @@ position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_isdkx")
 
 [node name="Damageable" parent="." instance=ExtResource("5_o7u3y")]
-max_health = 3
 
 [node name="TargetDetectionZone" parent="." instance=ExtResource("6_6nhxx")]
 collision_mask = 2
@@ -100,7 +99,6 @@ shape = SubResource("CapsuleShape2D_y3iir")
 debug_color = Color(0.494118, 0.572549, 0.341176, 0.419608)
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
-[connection signal="zero_health" from="Damageable" to="." method="_on_damageable_zero_health"]
 
 [editable path="Hurtbox"]
 [editable path="TargetDetectionZone"]

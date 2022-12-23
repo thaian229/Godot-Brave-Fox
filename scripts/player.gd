@@ -22,7 +22,6 @@ enum ActionState {
 
 @onready var anim_tree := $AnimationTree as AnimationTree
 @onready var anim_state := anim_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
-@onready var damageable := $Damageable as Damageable
 
 var action_state := ActionState.MOVING
 var dt_rolling := rolling_cooldown
@@ -36,6 +35,8 @@ func _ready() -> void:
 	anim_tree.active = true
 	if not anim_state:
 		print_debug("Failed to get animation node state machine playback")
+		
+	PlayerState.connect("zero_health", Callable(self, "_on_damageable_zero_health"))
 
 
 func _physics_process(delta: float) -> void:
@@ -139,10 +140,10 @@ func _on_trigger_action_finished() -> void:
 func _on_hurtbox_area_entered(area: Area2D) -> void:	
 	# lose health
 	var hitbox := area as Hitbox
-	if damageable and hitbox: 
-		damageable.current_health -= hitbox.damage
-	elif damageable:
-		damageable.current_health -= 1
+	if hitbox: 
+		PlayerState.health -= hitbox.damage
+	else:
+		PlayerState.health -= 1
 
 
 func _on_damageable_zero_health():

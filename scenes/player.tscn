@@ -799,10 +799,8 @@ debug_color = Color(0.431373, 0.592157, 0.321569, 0.419608)
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("5_ahbq6")
-max_health = 4
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
-[connection signal="zero_health" from="Damageable" to="." method="_on_damageable_zero_health"]
 
 [editable path="SwordPivot/SwordHitbox"]
 [editable path="Hurtbox"]

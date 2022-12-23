@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bsmq07gk2ndao"]
+[gd_scene load_steps=14 format=3 uid="uid://bsmq07gk2ndao"]
 
 [ext_resource type="PackedScene" uid="uid://c2my0vtkton55" path="res://scenes/player.tscn" id="1_o03e5"]
 [ext_resource type="PackedScene" uid="uid://csqepqkyac4q2" path="res://scenes/bush.tscn" id="2_ny41p"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cmvn82slvtube" path="res://sprites/World/CliffTileset.png" id="5_d4r2o"]
 [ext_resource type="PackedScene" uid="uid://cgy50c0n0x3a5" path="res://scenes/grass.tscn" id="6_56dwl"]
 [ext_resource type="PackedScene" uid="uid://ri4kpauc3tvo" path="res://scenes/bat.tscn" id="7_vd3k7"]
+[ext_resource type="PackedScene" uid="uid://drc3felmqdad3" path="res://scenes/ui/health_bar.tscn" id="8_cwfk4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vth4u"]
 texture = ExtResource("2_wjg1d")
@@ -955,3 +956,11 @@ position = Vector2(176, 56)
 
 [node name="Bat3" parent="YSorted/Enemies" instance=ExtResource("7_vd3k7")]
 position = Vector2(184, 136)
+
+[node name="HealthBar" parent="." instance=ExtResource("8_cwfk4")]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
