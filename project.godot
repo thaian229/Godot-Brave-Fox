@@ -28,12 +28,18 @@ _global_script_classes=[{
 "class": &"Player",
 "language": &"GDScript",
 "path": "res://scripts/player.gd"
+}, {
+"base": "Area2D",
+"class": &"TargetDetector",
+"language": &"GDScript",
+"path": "res://scripts/shared/target_detection_zone.gd"
 }]
 _global_script_class_icons={
 "Damageable": "",
 "Grass": "",
 "Hitbox": "",
-"Player": ""
+"Player": "",
+"TargetDetector": ""
 }
 
 [application]

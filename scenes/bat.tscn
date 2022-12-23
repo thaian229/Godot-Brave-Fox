@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://ri4kpauc3tvo"]
+[gd_scene load_steps=16 format=3 uid="uid://ri4kpauc3tvo"]
 
 [ext_resource type="Texture2D" uid="uid://b2c3qettitk71" path="res://sprites/Enemies/Bat.png" id="1_j8xwf"]
 [ext_resource type="Script" path="res://scripts/bat.gd" id="1_nvqtc"]
 [ext_resource type="Texture2D" uid="uid://d85txfqgn0lb" path="res://sprites/Shadows/SmallShadow.png" id="2_u55j8"]
 [ext_resource type="PackedScene" uid="uid://bspiw2fsefglc" path="res://scenes/shared/hurtbox.tscn" id="4_kglrw"]
 [ext_resource type="PackedScene" uid="uid://dp6xwpuwudx8m" path="res://scenes/shared/damageable.tscn" id="5_o7u3y"]
+[ext_resource type="PackedScene" uid="uid://bv8vo44027rpu" path="res://scenes/shared/target_detection_zone.tscn" id="6_6nhxx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5fxmk"]
 atlas = ExtResource("1_j8xwf")
@@ -41,9 +42,13 @@ radius = 4.0
 radius = 7.0
 height = 18.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_174li"]
+radius = 50.0
+
 [node name="Bat" type="CharacterBody2D"]
 texture_filter = 1
 collision_layer = 64
+collision_mask = 65
 script = ExtResource("1_nvqtc")
 knock_back_speed = 85
 air_friction = 85
@@ -66,6 +71,7 @@ texture = ExtResource("2_u55j8")
 position = Vector2(0, 15)
 collision_layer = 8
 collision_mask = 16
+is_show_hit = true
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2(0, -13)
@@ -74,7 +80,15 @@ shape = SubResource("CapsuleShape2D_isdkx")
 [node name="Damageable" parent="." instance=ExtResource("5_o7u3y")]
 max_health = 3
 
+[node name="TargetDetectionZone" parent="." instance=ExtResource("6_6nhxx")]
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="TargetDetectionZone" index="0"]
+shape = SubResource("CircleShape2D_174li")
+debug_color = Color(0.886275, 0.447059, 0.666667, 0.419608)
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="zero_health" from="Damageable" to="." method="_on_damageable_zero_health"]
 
 [editable path="Hurtbox"]
+[editable path="TargetDetectionZone"]
