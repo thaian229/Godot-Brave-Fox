@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ri4kpauc3tvo"]
+[gd_scene load_steps=18 format=3 uid="uid://ri4kpauc3tvo"]
 
 [ext_resource type="Texture2D" uid="uid://b2c3qettitk71" path="res://sprites/Enemies/Bat.png" id="1_j8xwf"]
 [ext_resource type="Script" path="res://scripts/bat.gd" id="1_nvqtc"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bspiw2fsefglc" path="res://scenes/shared/hurtbox.tscn" id="4_kglrw"]
 [ext_resource type="PackedScene" uid="uid://dp6xwpuwudx8m" path="res://scenes/shared/damageable.tscn" id="5_o7u3y"]
 [ext_resource type="PackedScene" uid="uid://bv8vo44027rpu" path="res://scenes/shared/target_detection_zone.tscn" id="6_6nhxx"]
+[ext_resource type="PackedScene" uid="uid://d3b5eqdx3jm3u" path="res://scenes/shared/hitbox.tscn" id="7_pdsqb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5fxmk"]
 atlas = ExtResource("1_j8xwf")
@@ -45,14 +46,17 @@ height = 18.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_174li"]
 radius = 50.0
 
-[node name="Bat" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3iir"]
+radius = 7.0
+height = 22.0
+
+[node name="w" type="CharacterBody2D"]
 texture_filter = 1
 collision_layer = 64
 collision_mask = 65
 script = ExtResource("1_nvqtc")
 knock_back_speed = 85
 air_friction = 85
-metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 3)
@@ -87,8 +91,17 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_174li")
 debug_color = Color(0.886275, 0.447059, 0.666667, 0.419608)
 
+[node name="Hitbox" parent="." instance=ExtResource("7_pdsqb")]
+collision_layer = 32
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_y3iir")
+debug_color = Color(0.494118, 0.572549, 0.341176, 0.419608)
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="zero_health" from="Damageable" to="." method="_on_damageable_zero_health"]
 
 [editable path="Hurtbox"]
 [editable path="TargetDetectionZone"]
+[editable path="Hitbox"]

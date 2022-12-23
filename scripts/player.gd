@@ -22,6 +22,7 @@ enum ActionState {
 
 @onready var anim_tree := $AnimationTree as AnimationTree
 @onready var anim_state := anim_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+@onready var damageable := $Damageable as Damageable
 
 var action_state := ActionState.MOVING
 var dt_rolling := rolling_cooldown
@@ -133,3 +134,16 @@ func _rolling_state(_delta: float) -> void:
 
 func _on_trigger_action_finished() -> void:
 	action_state = ActionState.MOVING
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:	
+	# lose health
+	var hitbox := area as Hitbox
+	if damageable and hitbox: 
+		damageable.current_health -= hitbox.damage
+	elif damageable:
+		damageable.current_health -= 1
+
+
+func _on_damageable_zero_health():
+	self.call_deferred("queue_free")

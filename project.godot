@@ -9,6 +9,11 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "Resource",
+"class": &"CombatStat",
+"language": &"GDScript",
+"path": "res://scripts/shared/combat_stat.gd"
+}, {
 "base": "Node",
 "class": &"Damageable",
 "language": &"GDScript",
@@ -35,6 +40,7 @@ _global_script_classes=[{
 "path": "res://scripts/shared/target_detection_zone.gd"
 }]
 _global_script_class_icons={
+"CombatStat": "",
 "Damageable": "",
 "Grass": "",
 "Hitbox": "",

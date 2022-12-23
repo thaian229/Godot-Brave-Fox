@@ -46,7 +46,7 @@ func _look_for_target() -> void:
 		ai_state = AiState.IDLING
 
 
-func _on_hurtbox_area_entered(area: Area2D):
+func _on_hurtbox_area_entered(area: Area2D) -> void:
 	# being knocked back
 	var parent := area.get_parent() as Node2D
 	var direction = (self.global_position - parent.global_position).normalized()

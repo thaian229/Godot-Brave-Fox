@@ -1,9 +1,10 @@
-[gd_scene load_steps=56 format=3 uid="uid://c2my0vtkton55"]
+[gd_scene load_steps=57 format=3 uid="uid://c2my0vtkton55"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1wicd"]
 [ext_resource type="Texture2D" uid="uid://cfhwtjynh1t8w" path="res://sprites/Player/Player.png" id="1_3wlxc"]
 [ext_resource type="PackedScene" uid="uid://d3b5eqdx3jm3u" path="res://scenes/shared/hitbox.tscn" id="3_dghy4"]
 [ext_resource type="PackedScene" uid="uid://bspiw2fsefglc" path="res://scenes/shared/hurtbox.tscn" id="4_odmbq"]
+[ext_resource type="Script" path="res://scripts/shared/damageable.gd" id="5_ahbq6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_edh0q"]
 radius = 4.0
@@ -789,9 +790,19 @@ disabled = true
 position = Vector2(0, -6)
 collision_layer = 4
 collision_mask = 32
+is_show_hit = true
+has_ghosting = true
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource("CapsuleShape2D_r280w")
+debug_color = Color(0.431373, 0.592157, 0.321569, 0.419608)
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource("5_ahbq6")
+max_health = 4
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="zero_health" from="Damageable" to="." method="_on_damageable_zero_health"]
 
 [editable path="SwordPivot/SwordHitbox"]
 [editable path="Hurtbox"]
