@@ -21,6 +21,7 @@ enum ActionState {
 }
 
 @onready var anim_tree := $AnimationTree as AnimationTree
+@onready var anim_player := $AnimationPlayerSub as AnimationPlayer
 @onready var anim_state := anim_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
 
 var action_state := ActionState.MOVING
@@ -144,6 +145,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		PlayerState.health -= hitbox.damage
 	else:
 		PlayerState.health -= 1
+	anim_player.play("Blinking")
 
 
 func _on_damageable_zero_health():
