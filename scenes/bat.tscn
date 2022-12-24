@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ri4kpauc3tvo"]
+[gd_scene load_steps=19 format=3 uid="uid://ri4kpauc3tvo"]
 
 [ext_resource type="Texture2D" uid="uid://b2c3qettitk71" path="res://sprites/Enemies/Bat.png" id="1_j8xwf"]
 [ext_resource type="Script" path="res://scripts/bat.gd" id="1_nvqtc"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dp6xwpuwudx8m" path="res://scenes/shared/damageable.tscn" id="5_o7u3y"]
 [ext_resource type="PackedScene" uid="uid://bv8vo44027rpu" path="res://scenes/shared/target_detection_zone.tscn" id="6_6nhxx"]
 [ext_resource type="PackedScene" uid="uid://d3b5eqdx3jm3u" path="res://scenes/shared/hitbox.tscn" id="7_pdsqb"]
+[ext_resource type="PackedScene" uid="uid://d1owgrfjjqjly" path="res://scenes/wander_controller.tscn" id="8_oc4sy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5fxmk"]
 atlas = ExtResource("1_j8xwf")
@@ -44,7 +45,7 @@ radius = 7.0
 height = 18.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_174li"]
-radius = 50.0
+radius = 70.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3iir"]
 radius = 7.0
@@ -82,6 +83,7 @@ position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_isdkx")
 
 [node name="Damageable" parent="." instance=ExtResource("5_o7u3y")]
+max_health = 3
 
 [node name="TargetDetectionZone" parent="." instance=ExtResource("6_6nhxx")]
 collision_mask = 2
@@ -98,7 +100,11 @@ position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_y3iir")
 debug_color = Color(0.494118, 0.572549, 0.341176, 0.419608)
 
+[node name="WanderController" parent="." instance=ExtResource("8_oc4sy")]
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="zero_health" from="Damageable" to="." method="_on_damageable_zero_health"]
+[connection signal="wander_target_changed" from="WanderController" to="." method="_on_wander_controller_wander_target_changed"]
 
 [editable path="Hurtbox"]
 [editable path="TargetDetectionZone"]

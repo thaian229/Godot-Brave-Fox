@@ -8,7 +8,6 @@ signal zero_health()
 @onready var current_health := max_health :
 	get: return current_health
 	set(v):
-		current_health = v
-		current_health = clampi(current_health, 0, max_health)
+		current_health = clampi(v, 0, max_health)
 		if current_health < 1:
 			self.emit_signal("zero_health")
