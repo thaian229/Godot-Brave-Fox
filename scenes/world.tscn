@@ -863,7 +863,6 @@ layer_0/tile_data = PackedInt32Array(327680, 0, 3, 327681, 65536, 3, 327682, 393
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(24, 24)
-current = true
 position_smoothing_enabled = true
 
 [node name="YSorted" type="Node2D" parent="."]
