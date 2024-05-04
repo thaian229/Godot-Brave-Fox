@@ -27,6 +27,7 @@ enum ActionState {
 
 var action_state := ActionState.IDLING
 var input_direction := Vector2.ZERO
+var facing_direction := Vector2.DOWN
 var dt_rolling := rolling_cooldown
 var is_movement_locked := false
 
@@ -65,7 +66,7 @@ func _physics_process(delta: float):
 		ActionState.ATTACKING:
 			self._process_attacking(delta)
 		ActionState.ROLLING:
-			self._process_rolling(delta)
+			self._process_rolling()
 
 func _update_input_direction():
 	# get move direction from user's directional inputs
@@ -88,8 +89,7 @@ func _update_move_animation():
 	if input_direction != Vector2.ZERO:
 		anim_tree.set("parameters/Idling/blend_position", input_direction)
 		anim_tree.set("parameters/Running/blend_position", input_direction)
-		anim_tree.set("parameters/Attack/blend_position", input_direction)
-		anim_tree.set("parameters/Roll/blend_position", input_direction)
+		facing_direction = input_direction
 		anim_state.travel("Running")
 	else:
 		anim_state.travel("Idling")
@@ -112,6 +112,7 @@ func _calculate_and_set_velocity(delta: float):
 func _trigger_attack():
 	# play animation
 	anim_state.travel("Attack")
+	anim_tree.set("parameters/Attack/blend_position", facing_direction)
 
 	is_movement_locked = true
 	action_state = ActionState.ATTACKING
@@ -124,21 +125,21 @@ func _process_attacking(delta: float):
 func _trigger_roll():
 	# play animation
 	anim_state.travel("Roll")
+	anim_tree.set("parameters/Roll/blend_position", facing_direction)
 	
 	dt_rolling = 0.0
 	is_movement_locked = true
 	action_state = ActionState.ROLLING
 
-func _process_rolling(delta: float):
+func _process_rolling():
 	# maintaining velocity base on pre-roll input direction
-	var direction := anim_tree.get("parameters/Roll/blend_position") as Vector2
-	direction = Vector2.DOWN if direction == Vector2.ZERO else direction.normalized()
-	self.velocity = direction * rolling_speed
+	self.velocity = facing_direction * rolling_speed
 	move_and_slide()
 
 func _on_trigger_action_finished():
 	is_movement_locked = false
 	action_state = ActionState.IDLING
+	_update_move_animation()
 
 func _on_hurtbox_area_entered(area: Area2D):
 	# lose health
