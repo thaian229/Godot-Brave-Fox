@@ -25,13 +25,28 @@ region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ad0x"]
 animations = [{
-"frames": [SubResource("AtlasTexture_0itsm"), SubResource("AtlasTexture_ytap2"), SubResource("AtlasTexture_h5va1"), SubResource("AtlasTexture_tli7c"), SubResource("AtlasTexture_h6jsv")],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0itsm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytap2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5va1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tli7c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6jsv")
+}],
+"loop": false,
 "name": &"default",
 "speed": 5.0
 }]
 
 [node name="GrassWitherVfx" type="AnimatedSprite2D"]
 texture_filter = 1
-frames = SubResource("SpriteFrames_4ad0x")
+sprite_frames = SubResource("SpriteFrames_4ad0x")
 script = ExtResource("1_xqjvd")

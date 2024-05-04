@@ -13,12 +13,18 @@ region = Rect2(24, 0, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oqqaj"]
 animations = [{
-"frames": [SubResource("AtlasTexture_2xc1k"), SubResource("AtlasTexture_5hr0i")],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xc1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hr0i")
+}],
+"loop": false,
 "name": &"default",
 "speed": 10.0
 }]
 
 [node name="HitVfx" type="AnimatedSprite2D"]
-frames = SubResource("SpriteFrames_oqqaj")
+sprite_frames = SubResource("SpriteFrames_oqqaj")
 script = ExtResource("2_k3im6")
