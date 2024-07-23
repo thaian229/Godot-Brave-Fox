@@ -45,12 +45,42 @@ region = Rect2(288, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dindh"]
 animations = [{
-"frames": [SubResource("AtlasTexture_akg6d"), SubResource("AtlasTexture_5mglb"), SubResource("AtlasTexture_ylagu"), SubResource("AtlasTexture_j5ujl"), SubResource("AtlasTexture_bn3be"), SubResource("AtlasTexture_75v8g"), SubResource("AtlasTexture_vr6dp"), SubResource("AtlasTexture_g37j1"), SubResource("AtlasTexture_nsqly"), SubResource("AtlasTexture_l75w6")],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akg6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mglb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ylagu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5ujl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bn3be")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75v8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vr6dp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g37j1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nsqly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l75w6")
+}],
+"loop": false,
 "name": &"default",
 "speed": 5.0
 }]
 
 [node name="PlayerDeathVfx" type="AnimatedSprite2D"]
-frames = SubResource("SpriteFrames_dindh")
+sprite_frames = SubResource("SpriteFrames_dindh")
 script = ExtResource("1_4ch76")
